@@ -1,0 +1,35 @@
+{
+  "name": "excod",
+  "version": "1.0.0",
+  "description": "A tool that scans a codebase, pick the important files, and export them as JSON to your clipboard or a file.",
+  "main": "index.js",
+  "bin": {
+    "excod": "./bin/excod"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/subhan-f/excod.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/subhan-f/excod/issues"
+  },
+  "homepage": "https://github.com/subhan-f/excod#readme",
+  "devDependencies": {
+    "@types/node": "^25.8.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "clipboardy": "^5.3.1",
+    "commander": "^14.0.3",
+    "globby": "^16.2.0"
+  }
+}
