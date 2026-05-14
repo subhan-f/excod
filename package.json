@@ -1,35 +1,45 @@
 {
   "name": "excod",
   "version": "1.0.0",
-  "description": "A tool that scans a codebase, pick the important files, and export them as JSON to your clipboard or a file.",
-  "main": "index.js",
+  "description": "Scan a codebase, identify important files, and export them as JSON — for clipboard, file, or stdout.",
+  "type": "module",
   "bin": {
-    "excod": "./bin/excod"
+    "excod": "./bin/excod.js"
   },
   "scripts": {
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx src/cli.ts",
+    "test": "vitest run",
+    "lint": "eslint src/ tests/",
+    "format": "prettier --write 'src/**/*.ts' 'tests/**/*.ts'",
+    "prepublishOnly": "npm run build && npm test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/subhan-f/excod.git"
   },
-  "keywords": [],
+  "keywords": ["cli", "code", "export", "json", "codebase", "llm"],
   "author": "",
   "license": "ISC",
-  "type": "module",
   "bugs": {
     "url": "https://github.com/subhan-f/excod/issues"
   },
   "homepage": "https://github.com/subhan-f/excod#readme",
-  "devDependencies": {
-    "@types/node": "^25.8.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^6.0.3"
-  },
   "dependencies": {
     "clipboardy": "^5.3.1",
     "commander": "^14.0.3",
     "globby": "^16.2.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^25.8.0",
+    "eslint": "^10.3.0",
+    "globals": "^17.6.0",
+    "pkg": "^5.8.1",
+    "prettier": "^3.8.3",
+    "tsx": "^4.22.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.59.3",
+    "vitest": "^4.1.6"
   }
 }

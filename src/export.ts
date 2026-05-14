@@ -1,18 +1,40 @@
-import { writeFileSync } from 'fs';
+import { writeFileSync, readFileSync } from 'fs';
+import { join } from 'path';
+import clipboard from 'clipboardy';
+
+export interface FileEntry {
+  path: string;
+  content: string;
+}
 
 export interface ExportData {
-  files: string[];
+  files: FileEntry[];
 }
 
-export function exportToJson(files: string[], outputPath?: string): void {
-  const data: ExportData = { files };
+export interface ExportOptions {
+  output?: string;
+  clipboard?: boolean;
+}
+
+export function buildExportData(filePaths: string[], baseDir: string = '.'): ExportData {
+  return {
+    files: filePaths.map((path) => ({
+      path,
+      content: readFileSync(join(baseDir, path), 'utf8'),
+    })),
+  };
+}
+
+export async function exportResults(data: ExportData, options: ExportOptions): Promise<void> {
   const json = JSON.stringify(data, null, 2);
-  if (outputPath) {
-    writeFileSync(outputPath, json);
-    console.log(`Exported to ${outputPath}`);
+
+  if (options.output != null) {
+    writeFileSync(options.output, json, 'utf8');
+    console.log(`Wrote ${data.files.length} file entries to ${options.output}`);
+  } else if (options.clipboard === true) {
+    await clipboard.write(json);
+    console.log(`Copied ${data.files.length} file entries to clipboard`);
   } else {
-    console.log(json);
+    process.stdout.write(json + '\n');
   }
 }
-
-// TODO: add clipboard export

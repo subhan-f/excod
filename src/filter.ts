@@ -1,5 +1,5 @@
-import { isFileImportant } from './utils.js';
+import { hasImportantExtension } from './utils.js';
 
 export function filterFiles(files: string[]): string[] {
-  return files.filter(isFileImportant);
+  return files.filter(hasImportantExtension);
 }

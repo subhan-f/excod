@@ -1,25 +1,29 @@
-#!/usr/bin/env node
-
+import { Command } from 'commander';
 import { scanDirectory } from './scan.js';
 import { filterFiles } from './filter.js';
-import { exportToJson } from './export.js';
+import { buildExportData, exportResults } from './export.js';
 import { resolvePath } from './utils.js';
 
-function main() {
-  const args = process.argv.slice(2);
-  if (args.length === 0) {
-    console.error('Usage: excod <directory> [output.json]');
-    process.exit(1);
-  }
-  const dir = args[0] as string;
-  const output = args[1];
-  const fullDir = resolvePath(dir);
-  console.log(`Scanning ${fullDir}...`);
-  const allFiles = scanDirectory(fullDir);
-  console.log(`Found ${allFiles.length} files`);
-  const importantFiles = filterFiles(allFiles);
-  console.log(`Filtered to ${importantFiles.length} important files`);
-  exportToJson(importantFiles, output);
+interface ActionOptions {
+  output?: string;
+  clipboard?: boolean;
 }
 
-main();
+const program = new Command();
+
+program
+  .name('excod')
+  .description('Scan a codebase, identify important files, and export as JSON')
+  .version('1.0.0')
+  .argument('[directory]', 'directory to scan', '.')
+  .option('-o, --output <path>', 'save JSON to a file')
+  .option('-c, --clipboard', 'copy JSON to clipboard')
+  .action(async (directory: string, options: ActionOptions) => {
+    const resolvedDir = resolvePath(directory);
+    const allFiles = await scanDirectory(resolvedDir);
+    const filteredFiles = filterFiles(allFiles);
+    const data = buildExportData(filteredFiles, resolvedDir);
+    await exportResults(data, options);
+  });
+
+await program.parseAsync();

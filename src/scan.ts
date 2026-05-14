@@ -1,27 +1,12 @@
-import { readdirSync, statSync } from 'fs';
-import { join } from 'path';
+import { globby } from 'globby';
+import { EXCLUDED_GLOB_PATTERNS } from './utils.js';
 
-export function scanDirectory(dir: string): string[] {
-  const files: string[] = [];
-
-  function scan(currentDir: string) {
-    try {
-      const items = readdirSync(currentDir);
-      for (const item of items) {
-        const fullPath = join(currentDir, item);
-        const stat = statSync(fullPath);
-        if (stat.isDirectory() && !item.startsWith('.')) {
-          // skip hidden dirs
-          scan(fullPath);
-        } else if (stat.isFile()) {
-          files.push(fullPath);
-        }
-      }
-    } catch (error) {
-      // ignore errors, like permission denied
-    }
-  }
-
-  scan(dir);
-  return files;
+export async function scanDirectory(dir: string): Promise<string[]> {
+  return globby('**/*', {
+    cwd: dir,
+    gitignore: true,
+    dot: false,
+    ignore: EXCLUDED_GLOB_PATTERNS,
+    onlyFiles: true,
+  });
 }
