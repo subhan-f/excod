@@ -1,11 +1,11 @@
 # excod
 
-A CLI tool that scans a codebase, identifies the important source and configuration files, and exports their paths as structured JSON — to stdout, a file, or your clipboard.
+Scan a codebase, pick the important files, and export their contents as a single JSON object — ready to paste into an LLM, a code review, or a file.
 
 ## Installation
 
 ```bash
-npm install -g excod
+npm install -g @subhan-f/excod
 ```
 
 ## Usage
@@ -17,48 +17,66 @@ excod
 # Scan a specific path
 excod ~/projects/my-app
 
-# Write JSON to a file
-excod . -o important.json
+# Save to a file
+excod . -o context.json
 
-# Copy JSON directly to clipboard
-excod ./src --clipboard
+# Copy directly to clipboard (macOS / Windows / Linux)
+excod . --clipboard
 
 # Show help
 excod --help
 ```
 
-### Output schema
+## Output format
+
+Each key is a relative file path, each value is the file's full content:
 
 ```json
 {
-  "files": [
-    { "path": "relative/path/to/file.ts", "content": "" }
-  ]
+  "src/cli.ts": "import { Command } from 'commander';\n...",
+  "src/utils.ts": "import { resolve, extname } from 'path';\n...",
+  "package.json": "{\n  \"name\": \"@subhan-f/excod\",\n  ...",
+  "README.md": "# excod\n..."
 }
 ```
 
 ## Options
 
 | Flag | Description |
-|------|-------------|
+|---|---|
 | `[directory]` | Directory to scan (default: `.`) |
-| `-o, --output <path>` | Save JSON to a file |
+| `-o, --output <path>` | Write JSON to a file |
 | `-c, --clipboard` | Copy JSON to clipboard |
-| `-V, --version` | Print version |
+| `-V, --version` | Print version number |
 | `-h, --help` | Display help |
 
-## File heuristic
+## What gets included
 
-Included extensions: `.ts` `.tsx` `.js` `.jsx` `.py` `.rb` `.go` `.rs` `.java` `.c` `.cpp` `.h` `.hpp` `.cs` `.json` `.yaml` `.yml` `.toml` `.md` `.txt` `.css` `.scss` `.html` `.vue` `.svelte`
+**Included extensions:**
+`.ts` `.tsx` `.js` `.jsx` `.py` `.rb` `.go` `.rs` `.java` `.c` `.cpp` `.h` `.hpp` `.cs` `.json` `.yaml` `.yml` `.toml` `.md` `.txt` `.css` `.scss` `.html` `.vue` `.svelte`
 
-Excluded directories: `node_modules`, `.git`, `dist`, `build`, `__pycache__`. Also respects `.gitignore` automatically.
+**Always excluded:**
+`node_modules/`, `.git/`, `dist/`, `build/`, `__pycache__/`, hidden directories
+
+**Respects `.gitignore` automatically.**
+
+## Why
+
+- **LLM context** — dump the relevant parts of a repo into a single JSON for an AI assistant
+- **Code reviews** — capture a project snapshot without zipping the whole repo
+- **Onboarding** — give new teammates a compact map of what matters
+- **Language-agnostic** — works on any project; no parsing, just file extension matching
 
 ## Development
 
 ```bash
-npm run build    # compile TypeScript → dist/
-npm run dev      # run directly with tsx (no build needed)
-npm test         # run Vitest test suite
-npm run lint     # ESLint
-npm run format   # Prettier
+npm run dev        # run via tsx without building
+npm run build      # compile TypeScript → dist/
+npm test           # Vitest test suite
+npm run lint       # ESLint
+npm run format     # Prettier
 ```
+
+## Requirements
+
+Node.js 18 or higher.

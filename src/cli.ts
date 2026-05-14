@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { Command } from 'commander';
 import { scanDirectory } from './scan.js';
 import { filterFiles } from './filter.js';

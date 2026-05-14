@@ -1,8 +1,11 @@
 src/
 tests/
 scripts/
+.github/
 .gitignore
 .prettierrc
 .eslintrc.js
+eslint.config.js
 tsconfig.json
-*.md
+vitest.config.ts
+*.log

@@ -1,10 +1,10 @@
 {
-  "name": "excod",
+  "name": "@subhan-f/excod",
   "version": "1.0.0",
   "description": "Scan a codebase, identify important files, and export them as JSON — for clipboard, file, or stdout.",
   "type": "module",
   "bin": {
-    "excod": "./bin/excod.js"
+    "excod": "bin/excod.cjs"
   },
   "scripts": {
     "build": "tsc",
@@ -18,9 +18,27 @@
     "type": "git",
     "url": "git+https://github.com/subhan-f/excod.git"
   },
-  "keywords": ["cli", "code", "export", "json", "codebase", "llm"],
+  "keywords": [
+    "cli",
+    "code",
+    "export",
+    "json",
+    "codebase",
+    "llm",
+    "context",
+    "developer-tools"
+  ],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist/",
+    "bin/",
+    "README.md",
+    "LICENSE"
+  ],
   "bugs": {
     "url": "https://github.com/subhan-f/excod/issues"
   },
