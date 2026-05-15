@@ -1,6 +1,10 @@
-# excod
+<p align="center">
+  <img src="assets/excod.gif" alt="excod — Export Code · Feed LLMs · Ship Faster" width="100%" />
+</p>
 
-Scan a codebase, pick the important files, and export their contents as a single JSON object — ready to paste into an LLM, a code review, or a file.
+<br />
+
+Scan a codebase, pick the important files, and export their full contents as a single JSON object — ready to paste into an LLM, a code review, or a file.
 
 ## Installation
 
@@ -42,13 +46,13 @@ Each key is a relative file path, each value is the file's full content:
 
 ## Options
 
-| Flag | Description |
-|---|---|
-| `[directory]` | Directory to scan (default: `.`) |
-| `-o, --output <path>` | Write JSON to a file |
-| `-c, --clipboard` | Copy JSON to clipboard |
-| `-V, --version` | Print version number |
-| `-h, --help` | Display help |
+| Flag                  | Description                      |
+| --------------------- | -------------------------------- |
+| `[directory]`         | Directory to scan (default: `.`) |
+| `-o, --output <path>` | Write JSON to a file             |
+| `-c, --clipboard`     | Copy JSON to clipboard           |
+| `-V, --version`       | Print version number             |
+| `-h, --help`          | Display help                     |
 
 ## What gets included
 
