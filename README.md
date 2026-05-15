@@ -4,6 +4,8 @@
 
 <br />
 
+**ex·cod** ( **/ˈɛks.kɒd/** ) — **EX**port **COD**e.
+
 Scan a codebase, pick the important files, and export their full contents as a single JSON object — ready to paste into an LLM, a code review, or a file.
 
 ## Installation
