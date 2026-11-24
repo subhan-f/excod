@@ -15,7 +15,7 @@ const program = new Command();
 program
   .name('excod')
   .description('Scan a codebase, identify important files, and export as JSON')
-  .version('1.0.0')
+  .version('1.0.4')
   .argument('[directory]', 'directory to scan', '.')
   .option('-o, --output <path>', 'save JSON to a file')
   .option('-c, --clipboard', 'copy JSON to clipboard')

@@ -3,10 +3,11 @@ import { resolve, relative, extname } from 'path';
 export const IMPORTANT_EXTENSIONS = new Set<string>([
   '.ts', '.tsx', '.js', '.jsx',
   '.py', '.rb', '.go', '.rs',
-  '.java', '.c', '.cpp', '.h', '.hpp', '.cs',
-  '.json', '.yaml', '.yml', '.toml',
+  '.java', '.kt', '.aidl', '.c', '.cpp', '.h', '.hpp', '.cs',
+  '.gradle', '.kts', '.pro',
+  '.json', '.yaml', '.yml', '.toml', '.properties',
   '.md', '.txt',
-  '.css', '.scss', '.html',
+  '.css', '.scss', '.html', '.xml',
   '.vue', '.svelte',
 ]);
 

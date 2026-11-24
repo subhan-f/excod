@@ -1,6 +1,6 @@
 {
   "name": "@subhan-f/excod",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Scan a codebase, identify important files, and export them as JSON — for clipboard, file, or stdout.",
   "type": "module",
   "bin": {
@@ -24,7 +24,6 @@
     "export",
     "json",
     "codebase",
-    "llm",
     "context",
     "developer-tools"
   ],

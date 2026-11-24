@@ -21,12 +21,26 @@ describe('filterFiles', () => {
     const files = [
       'a.ts', 'a.tsx', 'a.js', 'a.jsx',
       'a.py', 'a.rb', 'a.go', 'a.rs',
-      'a.java', 'a.c', 'a.cpp', 'a.h', 'a.hpp', 'a.cs',
-      'a.json', 'a.yaml', 'a.yml', 'a.toml',
-      'a.md', 'a.txt', 'a.css', 'a.scss', 'a.html',
+      'a.java', 'a.kt', 'a.aidl', 'a.c', 'a.cpp', 'a.h', 'a.hpp', 'a.cs',
+      'a.gradle', 'a.kts', 'a.pro',
+      'a.json', 'a.yaml', 'a.yml', 'a.toml', 'a.properties',
+      'a.md', 'a.txt', 'a.css', 'a.scss', 'a.html', 'a.xml',
       'a.vue', 'a.svelte',
     ];
     expect(filterFiles(files)).toHaveLength(files.length);
+  });
+
+  it('keeps Android source, build, and resource files', () => {
+    const files = [
+      'app/src/main/java/com/example/MainActivity.java',
+      'app/src/main/java/com/example/MainActivity.kt',
+      'app/build.gradle.kts',
+      'settings.gradle',
+      'gradle.properties',
+      'app/src/main/AndroidManifest.xml',
+    ];
+
+    expect(filterFiles(files)).toEqual(files);
   });
 
   it('returns empty array for empty input', () => {
